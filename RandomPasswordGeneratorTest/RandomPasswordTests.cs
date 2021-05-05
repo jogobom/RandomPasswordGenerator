@@ -50,5 +50,11 @@ namespace RandomPasswordGeneratorTest
                     .BeTrue($"the password {password} should contain at least one symbol");
             }
         }
+
+        [Fact]
+        public void PasswordContentShouldBeInARandomOrder()
+        {
+            false.Should().BeTrue();
+        }
     }
 }
