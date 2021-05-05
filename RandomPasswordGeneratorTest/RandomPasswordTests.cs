@@ -19,12 +19,10 @@ namespace RandomPasswordGeneratorTest
 
     public class RandomPasswordTests
     {
-        private static readonly Random RandomNumberGenerator = new();
-
         [Fact]
         public void PasswordShouldBe32CharactersLong()
         {
-            var password = GeneratePassword();
+            var password = RandomPasswordGenerator.GeneratePassword();
 
             password.Length.Should().Be(32);
         }
@@ -32,8 +30,8 @@ namespace RandomPasswordGeneratorTest
         [Fact]
         public void PasswordShouldBeRandom()
         {
-            var password1 = GeneratePassword();
-            var password2 = GeneratePassword();
+            var password1 = RandomPasswordGenerator.GeneratePassword();
+            var password2 = RandomPasswordGenerator.GeneratePassword();
 
             password1.Should().NotBe(password2);
         }
@@ -43,7 +41,7 @@ namespace RandomPasswordGeneratorTest
         {
             for (var i = 0; i < 1_000_000; i++)
             {
-                var password = GeneratePassword();
+                var password = RandomPasswordGenerator.GeneratePassword();
                 password.Any(c => char.IsUpper(c)).Should().BeTrue($"the password {password} should contain some uppercase");
                 password.Any(c => char.IsLower(c)).Should().BeTrue($"the password {password} should contain some lowercase");
                 password.Any(c => char.IsNumber(c)).Should()
@@ -51,31 +49,6 @@ namespace RandomPasswordGeneratorTest
                 password.Any(c => char.IsSymbol(c) || char.IsPunctuation(c)).Should()
                     .BeTrue($"the password {password} should contain at least one symbol");
             }
-        }
-
-        private static string GeneratePassword()
-        {
-            const string numeric = "1234567890";
-            var randomNumeric = numeric[RandomNumberGenerator.Next(numeric.Length)];
-
-            const string symbols = "#![]{}£$%&";
-            var randomSymbol = symbols[RandomNumberGenerator.Next(symbols.Length)];
-
-            var passwordInProgress = new StringBuilder();
-            passwordInProgress.Append(randomNumeric);
-            passwordInProgress.Append(randomSymbol);
-
-            const string letters = "abcdefghijklmnopqrstuvwxyz";
-            for (var i = 0; i < 30; i++)
-            {
-                var randomLetter = letters[RandomNumberGenerator.Next(letters.Length)];
-                if (RandomNumberGenerator.Next(2) == 0)
-                {
-                    randomLetter = char.ToUpper(randomLetter);
-                }
-                passwordInProgress.Append(randomLetter);
-            }
-            return passwordInProgress.ToString();
         }
     }
 }
