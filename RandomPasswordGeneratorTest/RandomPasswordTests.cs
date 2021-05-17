@@ -22,7 +22,7 @@ namespace RandomPasswordGeneratorTest
         [Fact]
         public void PasswordShouldBe32CharactersLong()
         {
-            var password = RandomPasswordGenerator.GeneratePassword();
+            var password = RandomPasswordGenerator.RandomPasswordGenerator.GeneratePassword();
 
             password.Length.Should().Be(32);
         }
@@ -30,8 +30,8 @@ namespace RandomPasswordGeneratorTest
         [Fact]
         public void PasswordShouldBeRandom()
         {
-            var password1 = RandomPasswordGenerator.GeneratePassword();
-            var password2 = RandomPasswordGenerator.GeneratePassword();
+            var password1 = RandomPasswordGenerator.RandomPasswordGenerator.GeneratePassword();
+            var password2 = RandomPasswordGenerator.RandomPasswordGenerator.GeneratePassword();
 
             password1.Should().NotBe(password2);
         }
@@ -41,7 +41,7 @@ namespace RandomPasswordGeneratorTest
         {
             for (var i = 0; i < 1_000_000; i++)
             {
-                var password = RandomPasswordGenerator.GeneratePassword();
+                var password = RandomPasswordGenerator.RandomPasswordGenerator.GeneratePassword();
                 password.Any(c => char.IsUpper(c)).Should().BeTrue($"the password {password} should contain some uppercase");
                 password.Any(c => char.IsLower(c)).Should().BeTrue($"the password {password} should contain some lowercase");
                 password.Any(c => char.IsNumber(c)).Should()

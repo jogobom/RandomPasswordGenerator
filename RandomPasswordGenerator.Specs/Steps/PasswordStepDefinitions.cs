@@ -21,7 +21,7 @@ namespace RandomPasswordGenerator.Specs.Steps
         [When(@"I generate a password")]
         public void WhenIGenerateAPassword()
         {
-            var password = RandomPasswordGeneratorTest.RandomPasswordGenerator.GeneratePassword();
+            var password = RandomPasswordGenerator.GeneratePassword();
             myScenarioContext[PasswordKey] = password;
         }
 

@@ -1,9 +1,7 @@
-// Copyright © 2021 Waters Corporation. All Rights Reserved.
-
-using System;
+ï»¿using System;
 using System.Text;
 
-namespace RandomPasswordGeneratorTest
+namespace RandomPasswordGenerator
 {
     public static class RandomPasswordGenerator
     {
@@ -40,7 +38,7 @@ namespace RandomPasswordGeneratorTest
 
         private static char GenerateRandomSymbolCharacter()
         {
-            const string symbols = "#![]{}£$%&";
+            const string symbols = "#![]{}Â£$%&";
             return symbols[RandomNumberGenerator.Next(symbols.Length)];
         }
 
