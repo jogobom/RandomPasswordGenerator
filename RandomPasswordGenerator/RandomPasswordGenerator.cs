@@ -9,17 +9,27 @@ namespace RandomPasswordGenerator
 
         public static string GeneratePassword()
         {
-            var randomNumeric = GenerateRandomNumericCharacter();
-            var randomSymbol = GenerateRandomSymbolCharacter();
-
             var passwordInProgress = new StringBuilder();
-            passwordInProgress.Append(randomNumeric);
-            passwordInProgress.Append(randomSymbol);
 
             const string letters = "abcdefghijklmnopqrstuvwxyz";
-            for (var i = 0; i < 30; i++)
+            for (var i = 0; i < 32; i++)
             {
-                var randomLetter = GenerateRandomUpperOrLowercaseLetter(letters);
+                char randomLetter = '0';
+
+                var typeOfCharacter = RandomNumberGenerator.Next(3);
+                switch (typeOfCharacter)
+                {
+                    case 0:
+                        randomLetter = GenerateRandomUpperOrLowercaseLetter(letters);
+                        break;
+                    case 1:
+                        randomLetter = GenerateRandomNumericCharacter();
+                        break;
+                    case 2:
+                        randomLetter = GenerateRandomSymbolCharacter();
+                        break;
+                }
+
                 passwordInProgress.Append(randomLetter);
             }
             return passwordInProgress.ToString();
